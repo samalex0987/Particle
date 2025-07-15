@@ -20,14 +20,29 @@
             z-index: 10;
         }
         
-        .subsection {
-            height: 100vh;
+        .solutions-section {
+            min-height: 400vh;
             position: relative;
             z-index: 10;
+        }
+        
+        .subsection {
+            height: 100vh;
+            position: sticky;
+            top: 0;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 0 10%;
+            justify-content: center;
+            padding: 0 5%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            width: 100%;
+        }
+        
+        .subsection.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .content {
@@ -40,17 +55,39 @@
             z-index: 20;
         }
         
+        .subsection-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 2rem;
+        }
+        
         .text-content {
             flex: 1;
             text-align: left;
             color: #ffffff;
-            max-width: 40%;
+            z-index: 20;
+            min-width: 0;
         }
         
         .shape-content {
             flex: 1;
-            height: 100%;
+            height: 60vh;
             position: relative;
+            transform: translateX(100%);
+            transition: transform 0.5s ease;
+            z-index: 15;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 0;
+        }
+        
+        .shape-content.visible {
+            transform: translateX(0);
         }
         
         #canvas-container {
@@ -78,6 +115,63 @@
             z-index: 100;
             transition: width 0.3s ease;
         }
+        
+        .solutions-title {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .subsection {
+                padding: 0 2%;
+            }
+            
+            .subsection-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .text-content {
+                text-align: center;
+                width: 100%;
+            }
+            
+            .shape-content {
+                width: 100%;
+                height: 40vh;
+                transform: translateY(100%);
+            }
+            
+            .shape-content.visible {
+                transform: translateY(0);
+            }
+            
+            .text-content h2 {
+                font-size: 2rem;
+            }
+            
+            .text-content p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .subsection {
+                padding: 0 1rem;
+            }
+            
+            .text-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .solutions-title h1 {
+                font-size: 2.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -88,39 +182,82 @@
     <div class="section bg-transparent">
         <div class="content">
             <h1 class="text-6xl font-bold mb-6 gradient-text">Automate the mundane</h1>
-            <p class="text-xl text-gray-400">Particles spreading like snow</p>
+            <p class="text-xl text-red-600">Elevate The Human Potential</p>
         </div>
     </div>
     
-    <div class="section bg-transparent">
-        <h1 class="text-6xl font-bold mb-6 gradient-text text-center">Our Solutions</h1>
-        <div class="subsection">
-            <div class="text-content">
-                <h2 class="text-4xl font-bold mb-4 gradient-text">Data and AI</h2>
-                <p class="text-lg text-gray-400">Harnessing data-driven insights with artificial intelligence.</p>
-            </div>
-            <div class="shape-content" data-shape="ai"></div>
+    <div class="solutions-section bg-transparent">
+        <div class="solutions-title">
+            <h1 class="text-6xl font-bold mb-6 gradient-text text-center">Our Solutions</h1>
         </div>
-        <div class="subsection">
-            <div class="text-content">
-                <h2 class="text-4xl font-bold mb-4 gradient-text">Open Hybrid Cloud</h2>
-                <p class="text-lg text-gray-400">Seamless integration across hybrid cloud environments.</p>
+        
+        <div class="subsection" data-shape="ai">
+            <div class="subsection-content">
+                <div class="text-content">
+                    <h2 class="text-4xl font-bold mb-4 gradient-text">Data and AI</h2>
+                    <p class="text-lg text-gray-400 leading-relaxed">Harnessing data-driven insights with artificial intelligence to transform your business operations and unlock new possibilities for growth and innovation.</p>
+            <br>
+                    <button 
+                class="relative inline-block px-6 py-3 font-medium group overflow-hidden border bg-black text-white rounded"
+            >
+            <span class="absolute inset-0 w-0 bg-gray-200 transition-all duration-300 ease-out group-hover:w-full"></span>
+            <span class="relative z-10 group-hover:text-black">Learn More</span>
+          </button>
+                </div>
+                <div class="shape-content" data-shape="ai"></div>
             </div>
-            <div class="shape-content" data-shape="cloud"></div>
         </div>
-        <div class="subsection">
-            <div class="text-content">
-                <h2 class="text-4xl font-bold mb-4 gradient-text">IT and Business Automation</h2>
-                <p class="text-lg text-gray-400">Streamlining operations for efficiency and scale.</p>
+        
+        <div class="subsection" data-shape="cloud">
+            <div class="subsection-content">
+                <div class="text-content">
+                    <h2 class="text-4xl font-bold mb-4 gradient-text">Open Hybrid Cloud</h2>
+                    <p class="text-lg text-gray-400 leading-relaxed">Seamless integration across hybrid cloud environments, providing flexibility, scalability, and security for your modern infrastructure needs.</p>
+                <br>
+                    <button 
+                class="relative inline-block px-6 py-3 font-medium group overflow-hidden border bg-black text-white rounded"
+            >
+            <span class="absolute inset-0 w-0 bg-gray-200 transition-all duration-300 ease-out group-hover:w-full"></span>
+            <span class="relative z-10 group-hover:text-black">Learn More</span>
+          </button>
+                </div>
+                
+                <div class="shape-content" data-shape="cloud"></div>
             </div>
-            <div class="shape-content" data-shape="tick"></div>
         </div>
-        <div class="subsection">
-            <div class="text-content">
-                <h2 class="text-4xl font-bold mb-4 gradient-text">Security and Sustainability</h2>
-                <p class="text-lg text-gray-400">Protecting systems while promoting sustainable practices.</p>
+        
+        <div class="subsection" data-shape="tick">
+            <div class="subsection-content">
+                <div class="text-content">
+                    <h2 class="text-4xl font-bold mb-4 gradient-text">IT and Business Automation</h2>
+                    <p class="text-lg text-gray-400 leading-relaxed">Streamlining operations for efficiency and scale, automating repetitive tasks to focus on strategic initiatives that drive business value.</p>
+                 <br>
+                    <button 
+                class="relative inline-block px-6 py-3 font-medium group overflow-hidden border bg-black text-white rounded"
+            >
+            <span class="absolute inset-0 w-0 bg-gray-200 transition-all duration-300 ease-out group-hover:w-full"></span>
+            <span class="relative z-10 group-hover:text-black">Learn More</span>
+          </button>
+                </div>
+                <div class="shape-content" data-shape="tick"></div>
             </div>
-            <div class="shape-content" data-shape="key"></div>
+        </div>
+        
+        <div class="subsection" data-shape="key">
+            <div class="subsection-content">
+                <div class="text-content">
+                    <h2 class="text-4xl font-bold mb-4 gradient-text">Security and Sustainability</h2>
+                    <p class="text-lg text-gray-400 leading-relaxed">Protecting systems while promoting sustainable practices, ensuring your business is secure, compliant, and environmentally responsible.</p>
+                 <br>
+                    <button 
+                class="relative inline-block px-6 py-3 font-medium group overflow-hidden border bg-black text-white rounded"
+            >
+            <span class="absolute inset-0 w-0 bg-gray-200 transition-all duration-300 ease-out group-hover:w-full"></span>
+            <span class="relative z-10 group-hover:text-black">Learn More</span>
+          </button>
+                </div>
+                <div class="shape-content" data-shape="key"></div>
+            </div>
         </div>
     </div>
 
@@ -134,8 +271,9 @@
                 this.currentShape = -1;
                 this.targetPositions = new Float32Array(this.particleCount * 3);
                 this.originalPositions = new Float32Array(this.particleCount * 3);
-                this.morphProgress = 1; // Start with completed morph
+                this.morphProgress = 1;
                 this.isTransitioning = false;
+                this.lastScrollDirection = 1;
                 
                 this.init();
                 this.createParticles();
@@ -164,7 +302,6 @@
             createParticles() {
                 const geometry = new THREE.BufferGeometry();
                 
-                // Initialize with spread positions
                 this.generateSpreadPositions(this.originalPositions);
                 this.targetPositions.set(this.originalPositions);
                 
@@ -203,42 +340,31 @@
                 }
             }
             
-            // Generate "AI" text shape
             generateAIPositions(positions) {
                 let particleIndex = 0;
                 const letterSpacing = 1.5;
                 const strokeWidth = 0.20;
                 
-                // Letter "A"
                 const aPoints = [
-                    // Left diagonal stroke
                     ...this.generateLinePoints(-1.5, -1, -0.5, 1, 300),
-                    // Right diagonal stroke
                     ...this.generateLinePoints(-0.5, 1, 0.5, -1, 300),
-                    // Horizontal bar
                     ...this.generateLinePoints(-1, 0, 0, 0, 200)
                 ];
                 
-                // Letter "I"
                 const iPoints = [
-                    // Vertical stroke
                     ...this.generateLinePoints(1.5, -1, 1.5, 1, 400),
-                    // Top horizontal
                     ...this.generateLinePoints(1.2, 1, 1.8, 1, 100),
-                    // Bottom horizontal
                     ...this.generateLinePoints(1.2, -1, 1.8, -1, 100)
                 ];
                 
                 const allPoints = [...aPoints, ...iPoints];
                 
-                // Fill positions array
                 for (let i = 0; i < this.particleCount; i++) {
                     if (i < allPoints.length) {
                         positions[i * 3] = allPoints[i].x;
                         positions[i * 3 + 1] = allPoints[i].y;
                         positions[i * 3 + 2] = allPoints[i].z || 0;
                     } else {
-                        // Random positions for remaining particles
                         positions[i * 3] = (Math.random() - 0.5) * 6;
                         positions[i * 3 + 1] = (Math.random() - 0.5) * 4;
                         positions[i * 3 + 2] = (Math.random() - 0.5) * 2;
@@ -257,42 +383,39 @@
                 return points;
             }
             
-            // Generate cloud shape
             generateCloudPositions(positions) {
                 for (let i = 0; i < this.particleCount; i++) {
-                    // Create multiple spheres to form cloud shape
                     const cloudCenter = Math.floor(Math.random() * 5);
                     let centerX, centerY, radius;
                     
                     switch(cloudCenter) {
-                        case 0: // Main body
+                        case 0:
                             centerX = 0;
                             centerY = 0;
                             radius = 1.2;
                             break;
-                        case 1: // Left bump
+                        case 1:
                             centerX = -1;
                             centerY = 0.2;
                             radius = 0.8;
                             break;
-                        case 2: // Right bump
+                        case 2:
                             centerX = 1;
                             centerY = 0.1;
                             radius = 0.9;
                             break;
-                        case 3: // Top bump
+                        case 3:
                             centerX = -0.3;
                             centerY = 0.8;
                             radius = 0.7;
                             break;
-                        case 4: // Small right bump
+                        case 4:
                             centerX = 0.7;
                             centerY = -0.3;
                             radius = 0.6;
                             break;
                     }
                     
-                    // Generate point within sphere
                     const theta = Math.random() * 2 * Math.PI;
                     const phi = Math.acos(2 * Math.random() - 1);
                     const r = Math.random() * radius;
@@ -303,13 +426,10 @@
                 }
             }
             
-            // Generate checkmark/tick shape
             generateTickPositions(positions) {
                 let particleIndex = 0;
                 
-                // First stroke (short diagonal up-left to down-right)
                 const stroke1Points = this.generateLinePoints(-0.5, 0, 0, -0.8, 600);
-                // Second stroke (from middle to up-right)
                 const stroke2Points = this.generateLinePoints(0, -0.8, 1.2, 0.8, 800);
                 
                 const allPoints = [...stroke1Points, ...stroke2Points];
@@ -320,7 +440,6 @@
                         positions[i * 3 + 1] = allPoints[i].y;
                         positions[i * 3 + 2] = allPoints[i].z || 0;
                     } else {
-                        // Random positions around the tick
                         positions[i * 3] = (Math.random() - 0.5) * 4;
                         positions[i * 3 + 1] = (Math.random() - 0.5) * 4;
                         positions[i * 3 + 2] = (Math.random() - 0.5) * 1;
@@ -328,11 +447,9 @@
                 }
             }
             
-            // Generate key shape
             generateKeyPositions(positions) {
                 let particleIndex = 0;
                 
-                // Key handle (circle)
                 const handlePoints = [];
                 for (let i = 0; i < 800; i++) {
                     const angle = (i / 800) * Math.PI * 2;
@@ -342,10 +459,8 @@
                     handlePoints.push({ x, y, z: (Math.random() - 0.5) * 0.2 });
                 }
                 
-                // Key shaft (horizontal line)
                 const shaftPoints = this.generateLinePoints(-0.9, 0, 1.2, 0, 500);
                 
-                // Key teeth
                 const teeth1Points = this.generateLinePoints(0.8, 0, 0.8, -0.4, 100);
                 const teeth2Points = this.generateLinePoints(1.0, 0, 1.0, -0.3, 100);
                 const teeth3Points = this.generateLinePoints(1.2, 0, 1.2, -0.5, 100);
@@ -358,7 +473,6 @@
                         positions[i * 3 + 1] = allPoints[i].y;
                         positions[i * 3 + 2] = allPoints[i].z || 0;
                     } else {
-                        // Random positions around the key
                         positions[i * 3] = (Math.random() - 0.5) * 6;
                         positions[i * 3 + 1] = (Math.random() - 0.5) * 4;
                         positions[i * 3 + 2] = (Math.random() - 0.5) * 1;
@@ -371,7 +485,6 @@
                 
                 this.isTransitioning = true;
                 
-                // Store current positions as starting point
                 const currentPositions = this.particles.geometry.attributes.position.array;
                 this.originalPositions.set(currentPositions);
                 
@@ -415,7 +528,7 @@
                 }
                 
                 this.particles.geometry.attributes.position.needsUpdate = true;
-                this.morphProgress += 0.02; // Slightly faster transition
+                this.morphProgress += 0.02;
             }
             
             easeInOutQuad(t) {
@@ -424,6 +537,7 @@
             
             setupScrollListener() {
                 let ticking = false;
+                let lastScrollTop = 0;
                 
                 const updateOnScroll = () => {
                     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -432,25 +546,47 @@
                     
                     document.getElementById('progress').style.width = (scrollProgress * 100) + '%';
                     
-                    const totalSections = 5; // 1 hero + 4 subsections
                     const sectionHeight = window.innerHeight;
-                    const totalScrollableHeight = totalSections * sectionHeight;
+                    const solutionsSection = document.querySelector('.solutions-section');
+                    const solutionsTop = solutionsSection.offsetTop;
+                    const subsections = document.querySelectorAll('.subsection');
+                    
+                    this.lastScrollDirection = scrollTop > lastScrollTop ? 1 : -1;
+                    lastScrollTop = scrollTop;
                     
                     let shapeIndex = -1;
                     
                     if (scrollTop < sectionHeight) {
-                        // First section - snow spread
                         shapeIndex = -1;
                         this.particles.position.x = 0;
                         this.particles.position.y = 0;
-                    } else {
-                        // Second section with 4 subsections
-                        const subsectionIndex = Math.floor((scrollTop - sectionHeight) / sectionHeight);
-                        shapeIndex = Math.min(subsectionIndex, 3); // Clamp to 0-3
+                        subsections.forEach(s => s.classList.remove('visible'));
+                        document.querySelectorAll('.shape-content').forEach(s => s.classList.remove('visible'));
+                    } else if (scrollTop >= solutionsTop) {
+                        const scrollInSolutions = scrollTop - solutionsTop;
+                        const subsectionIndex = Math.min(
+                            Math.floor(scrollInSolutions / (sectionHeight * 0.8)),
+                            subsections.length - 1
+                        );
+                        shapeIndex = subsectionIndex;
                         
-                        // Position particles on the right side for shapes
-                        this.particles.position.x = 2.5;
-                        this.particles.position.y = 0;
+                        subsections.forEach((subsection, index) => {
+                            const isVisible = index === subsectionIndex;
+                            subsection.classList.toggle('visible', isVisible);
+                            const shapeEl = subsection.querySelector('.shape-content');
+                            if (shapeEl) {
+                                shapeEl.classList.toggle('visible', isVisible);
+                            }
+                        });
+                        
+                        // Responsive particle positioning
+                        if (window.innerWidth <= 768) {
+                            this.particles.position.x = 0;
+                            this.particles.position.y = -1;
+                        } else {
+                            this.particles.position.x = 2.5;
+                            this.particles.position.y = 0;
+                        }
                     }
                     
                     if (shapeIndex !== this.currentShape) {
@@ -458,7 +594,6 @@
                         this.morphToShape(this.currentShape);
                     }
                     
-                    // Smoother rotation based on scroll
                     const rotationMultiplier = 0.5;
                     this.particles.rotation.y = scrollProgress * Math.PI * 2 * rotationMultiplier;
                     this.particles.rotation.x = scrollProgress * Math.PI * 0.3 * rotationMultiplier;
@@ -474,8 +609,6 @@
                 };
                 
                 window.addEventListener('scroll', requestTick);
-                
-                // Initial call to set up the first shape
                 updateOnScroll();
             }
             
@@ -484,7 +617,6 @@
                 
                 this.updateMorph();
                 
-                // Gentle continuous rotation
                 this.particles.rotation.y += 0.001;
                 
                 this.renderer.render(this.scene, this.camera);
